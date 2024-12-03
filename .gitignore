@@ -26,3 +26,6 @@ replay_pid*
 
 *.md
 !README.md
+chat.md
+orders.md
+products.md
