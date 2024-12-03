@@ -168,13 +168,23 @@ public class Main {
         // try to parse the response as json for pretty printing
         String prettyResponse = "";
         try {
-            Map<String, Object> responseMap = Serializer.fromJson(response, new Serializer.ParamType<Map<String, Object>>() {});
-            prettyResponse = Serializer.json(
-                responseMap,
-                true
-            );
+            if (response.trim().startsWith("[")) {
+                List<Map<String, Object>> responseMapList = Serializer.fromJson(response, new Serializer.ParamType<List<Map<String, Object>>>() {});
+                prettyResponse = Serializer.json(
+                    responseMapList,
+                    true
+                );
+            }
+            else {
+                Map<String, Object> responseMap = Serializer.fromJson(response, new Serializer.ParamType<Map<String, Object>>() {});
+                prettyResponse = Serializer.json(
+                    responseMap,
+                    true
+                );
+            }
         } catch (Exception e) {
             prettyResponse = response;
+            e.printStackTrace();
         }
 
         // append the response to the file
@@ -478,15 +488,16 @@ public class Main {
                 List<Map<String, Object>> value = (List<Map<String, Object>>) getObjectFromString(json);
 
                 // convert maps into objects
-                Class<?> listType = (Class<?>) ((ParameterizedType) type).getActualTypeArguments()[0];
+                Type listType = ((ParameterizedType) type).getActualTypeArguments()[0];
+                Class<?> listTypeClass = typeToClassWildcard(listType);
                 List<Object> newList = new ArrayList<>();
                 for (Map<String, Object> elem : value) {
-                    if (Map.class.isAssignableFrom(listType)) {
+                    if (Map.class.isAssignableFrom(listTypeClass)) {
                         newList.add(elem);
                     }
                     else {
                         Object converted = convertMapToObj(
-                            getDefault(listType),
+                            getDefault(listTypeClass),
                             elem
                         );
                         newList.add(converted);
@@ -875,6 +886,7 @@ public class Main {
                             throw new SerializerException("Double nested lists aren't supported for jsonMap conversion. Map key: " + entry.getKey(), null);
                         }
                         else if (o instanceof String || o.getClass().isEnum()) {
+                            builder.append("    ").append("    ");
                             appendStringOrEnum(
                                 builder,
                                 o,
@@ -904,7 +916,8 @@ public class Main {
 
             }
 
-            builder.deleteCharAt(builder.length() - 2);
+            if (!map.isEmpty()) builder.deleteCharAt(builder.length() - 2);
+            else builder.deleteCharAt(builder.length() - 1);
             builder.append("}");
 
             return builder.toString();
@@ -960,11 +973,8 @@ public class Main {
                     }
                     else if (isNonEscapedQuote(json, j)) {
                         j++;
-                        while (json.charAt(j) != '\"')  {
+                        while (!isNonEscapedQuote(json, j))  {
                             j++;
-                            if ( json.charAt(j-1) == '\\' && isNonEscapedQuote(json, j)) {
-                                j++;
-                            }
                         }
                     }
                     else {
@@ -1141,7 +1151,7 @@ public class Main {
          */
         public static <T, S> Map<T,S> safeCastMap(Object obj, Class<T> keyType, Class<S> valueType) {
             try {
-                Map<T, S> newMap = new HashMap<>();
+                Map<T, S> newMap = new LinkedHashMap<>();
                 for(Object entry : safeCast(obj, Map.class).entrySet()) {
                     if (entry instanceof Map.Entry<?, ?> newEntry) {
                         newMap.put(

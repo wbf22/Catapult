@@ -10,7 +10,7 @@
             "request": "launch",
             "mainClass": "the.bear.Main",
             "projectName": "catapult",
-            "args": "orders.md"
+            "args": "products.md"
         }
     ]
 }
