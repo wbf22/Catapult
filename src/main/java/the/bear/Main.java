@@ -162,6 +162,7 @@ public class Main {
         );
 
         String response = "";
+        long time = System.currentTimeMillis();
         if (requestType.toLowerCase().equals("get")) {
             response = client.get(url, headers, String.class);
         }
@@ -180,6 +181,8 @@ public class Main {
         else {
             throw new RuntimeException("Invalid request type: " + requestType);
         }
+        time = System.currentTimeMillis() - time;
+        System.out.println("Time: " + time + "ms");
 
         appendResponsePretty(file_content, response, file_path);
 
@@ -200,9 +203,14 @@ public class Main {
 
             ProcessBuilder processBuilder = new ProcessBuilder();
             processBuilder.command("bash", "-c", curlCommandBuilder.toString());
+
+            long time = System.currentTimeMillis();
             Process process = processBuilder.start();
             // Process process = new ProcessBuilder("pwd").start();
             process.waitFor();
+            time = System.currentTimeMillis() - time;
+            System.out.println("Time: " + time + "ms");
+
             response = new String(process.getInputStream().readAllBytes()).trim();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
