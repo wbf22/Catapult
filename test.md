@@ -1,16 +1,15 @@
-# type
-GET
+curl --location -v --trace-ascii curllog.txt 'https://attractions-api.accessdevelopment-stage.com/v1/attractions/admin/digital-codes/prd_0GV2BJMV03MBY' \
+--form 'expiration="2025-01-02T14:00:00+00"' \
+--form 'threshold="10"' \
+--form 'file=@"test.csv"'
 
-# url
-https://attractions-api.accessdevelopment-stage.com/v2/attractions/attr_0D1QMQ03EVWD3/products?date=2025-06-22&days=2&flow_id=flow_0E7C2X3EPSG29
 
-# headers
-Program-Key=203821
+curl --location 'https://attractions-api.accessdevelopment-stage.com/v1/attractions/admin/digital-codes/prd_0GV2BJMV03MBY' \
+--form 'expiration="2025-01-02T14:00:00+00"' \
+--form 'threshold="10"' \
+--form 'file=@"test.csv"'
 
-# body
-```json
-{
-  "name": "John Doe",
-  "age": 30
-}
-```
+curl --location 'https://attractions-api.accessdevelopment-stage.com/v1/attractions/admin/digital-codes/prd_0GV2BJMV03MBY' \
+--form 'expiration="2025-01-02T14:00:00+00"' \
+--form 'threshold="10"' \
+--form 'file=@"test.csv"'

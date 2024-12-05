@@ -18,6 +18,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.Normalizer.Form;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -26,6 +27,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -42,9 +44,11 @@ public class Main {
 
         String file_path = args[0];
         String file_content = Files.readString(Path.of(file_path));
-        String[] lines = file_content.split("\n");
+
+
 
         // remove comments
+        String[] lines = file_content.split("\n");
         List<String> newLines = new ArrayList<>();
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i];
@@ -72,6 +76,15 @@ public class Main {
                 newLines.add(line);
             }
         }
+
+
+        // if file starts with a curl command run the curl command instead
+        boolean isCurl = newLines.get(0).startsWith("curl");
+        if (isCurl) {
+            runCurl(newLines, file_content, file_path);
+            return;
+        }
+
 
         // parse the file
         String requestType = "";
@@ -121,6 +134,7 @@ public class Main {
                     i++;
                     line = newLines.get(i);
                 }
+                String type = line.trim().replace("```", "");
                 i++;
                 line = newLines.get(i);
                 StringBuilder bodyBuilder = new StringBuilder();
@@ -130,6 +144,9 @@ public class Main {
                     line = newLines.get(i);
                 }
                 body = bodyBuilder.toString();
+
+                headers.put("Content-Length", String.valueOf(body.length()));
+
             }
             else if (line.startsWith("# response")) break;
 
@@ -149,6 +166,7 @@ public class Main {
             response = client.get(url, headers, String.class);
         }
         else if (requestType.toLowerCase().equals("post")) {
+            System.out.println(body);
             response = client.post(url, headers, body, String.class);
         }
         else if (requestType.toLowerCase().equals("put")) {
@@ -164,7 +182,40 @@ public class Main {
             throw new RuntimeException("Invalid request type: " + requestType);
         }
 
+        appendResponsePretty(file_content, response, file_path);
+
+    }
+
+    public static void runCurl(List<String> newLines, String file_content, String file_path) throws IOException  {
         
+        // extract curl command
+        StringBuilder curlCommandBuilder = new StringBuilder();
+        for (String line : newLines) {
+            if (line.startsWith("# response")) break;
+            curlCommandBuilder.append(line).append("\n");
+        }
+
+        // run the curl command
+        String response = "";
+        try {
+
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            processBuilder.command("bash", "-c", curlCommandBuilder.toString());
+            Process process = processBuilder.start();
+            // Process process = new ProcessBuilder("pwd").start();
+            process.waitFor();
+            response = new String(process.getInputStream().readAllBytes()).trim();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        // prettify the response and append to file
+        appendResponsePretty(file_content, response, file_path);
+    }
+
+    public static void appendResponsePretty(String file_content, String response, String file_path) throws IOException {
+
         // try to parse the response as json for pretty printing
         String prettyResponse = "";
         try {
@@ -198,10 +249,7 @@ public class Main {
 
         // write the file
         Files.writeString(Path.of(file_path), file_content);
-
     }
-    
-
 
 
     // HELPER CLASSES
@@ -1315,5 +1363,92 @@ public class Main {
         }
     }
 
+
+    public class FormData {
+
+        public static Map<String,String> contentTypes = Map.ofEntries(
+            Map.entry("jpg", "image/jpeg"),
+            Map.entry("jpeg", "image/jpeg"),
+            Map.entry("png", "image/png"),
+            Map.entry("gif", "image/gif"),
+            Map.entry("bmp", "image/bmp"),
+            // Map.entry("csv", "text/csv"),
+            Map.entry("csv", "application/octet-stream"),
+            Map.entry("doc", "application/msword"),
+            Map.entry("docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
+            Map.entry("pdf", "application/pdf"),
+            Map.entry("ppt", "application/vnd.ms-powerpoint"),
+            Map.entry("pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation"),
+            Map.entry("zip", "application/zip"),
+            Map.entry("txt", "text/plain"),
+            Map.entry("json", "application/json"),
+            Map.entry("xml", "application/xml"),
+            Map.entry("html", "text/html"),
+            Map.entry("css", "text/css"),
+            Map.entry("js", "application/javascript"),
+            Map.entry("mp4", "video/mp4"),
+            Map.entry("mp3", "audio/mpeg"),
+            Map.entry("wav", "audio/wav"),
+            Map.entry("ogg", "audio/ogg"),
+            Map.entry("flac", "audio/flac"),
+            Map.entry("webm", "video/webm"),
+            Map.entry("avi", "video/x-msvideo"),
+            Map.entry("wmv", "video/x-ms-wmv"),
+            Map.entry("mov", "video/quicktime"),
+            Map.entry("mkv", "video/x-matroska"),
+            Map.entry("webp", "image/webp"),
+            Map.entry("svg", "image/svg+xml"),
+            Map.entry("ico", "image/x-icon"),
+            Map.entry("tif", "image/tiff"),
+            Map.entry("tiff", "image/tiff")
+        );
+        
+        public static List<String> makeBodyMultipart(Map<String, String> elements) {
+            String boundary = "---------------------------" + System.currentTimeMillis();
+
+            StringBuilder builder = new StringBuilder();
+            for (Map.Entry<String,String> element : elements.entrySet()) {
+                builder.append(boundary)
+                    .append("\r\n")
+                    .append("Content-Disposition: form-data; name=\"")
+                    .append(element.getKey())
+                    .append("\"");
+
+                String data = element.getValue();
+                if (element.getValue().startsWith("@")) {
+                    // file=@"/path/to/file"
+                    String path = element.getValue().substring(2, element.getValue().length() - 1);
+                    builder.append("; filename=\"").append(path.substring(path.lastIndexOf('/') + 1)).append("\"\r\n");
+                    String contentType = contentTypes.get(
+                        path.substring(path.lastIndexOf('.') + 1)  
+                    );
+                    if (contentType == null) {
+                        throw new RuntimeException("Unsupported file type");
+                    }
+                    builder.append("Content-Type: ").append(contentType);
+                    try {
+                        data = Files.readString(Path.of(path));
+                    } catch (IOException e) {
+                        throw new RuntimeException("Couldn't read file", e);
+                    }
+
+                    builder.append("\r\n")
+                        .append("\r\n")
+                        .append(data)
+                        .append("\r\n");
+
+                }
+                else {
+                    builder.append("\r\n")
+                        .append("\r\n")
+                        .append(data)
+                        .append("\r\n");
+                }
+
+            }
+            builder.append(boundary).append("--\r\n");
+            return List.of(boundary, builder.toString());
+        }
+    }
 
 } 

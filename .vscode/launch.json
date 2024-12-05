@@ -6,11 +6,19 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FileUploadExample",
+            "request": "launch",
+            "mainClass": "FileUploadExample",
+            "projectName": "catapult"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "the.bear.Main",
             "projectName": "catapult",
-            "args": "products.md"
+            "args": "orders.md"
+            // "args": "codes.md"
         }
     ]
 }

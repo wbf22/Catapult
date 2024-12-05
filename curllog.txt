@@ -1,0 +1,168 @@
+== Info: Host attractions-api.accessdevelopment-stage.com:443 was resolved.
+== Info: IPv6: (none)
+== Info: IPv4: 172.31.110.152, 172.31.75.226, 172.31.60.62
+== Info:   Trying 172.31.110.152:443...
+== Info: Connected to attractions-api.accessdevelopment-stage.com (172.31.110.152) port 443
+== Info: ALPN: curl offers h2,http/1.1
+== Info: (304) (OUT), TLS handshake, Client hello (1):
+=> Send SSL data, 348 bytes (0x15c)
+0000: ...X..Y39.&4]C^..M.......$...`]7%.N... .#........zb....58.N}..B?
+0040: ...Zu...b.............0.,.(.$.......k.9...........=.5...../.+.'.
+0080: #.......g.3...E...<./...A.......................+............3.&
+00c0: .$... ...7..l..(...z....s......K#&..l=...0....+attractions-api.a
+0100: ccessdevelopment-stage.com......................................
+0140: .................h2.http/1.1
+== Info:  CAfile: /etc/ssl/cert.pem
+== Info:  CApath: none
+== Info: (304) (IN), TLS handshake, Server hello (2):
+<= Recv SSL data, 100 bytes (0x64)
+0000: ...`..F....`.x.........g.[..]Ci.Q...OO $.L.~..*.u.x.I.0..L1RBQ.~
+0040: .....y../.........................h2
+== Info: TLSv1.2 (IN), TLS handshake, Certificate (11):
+<= Recv SSL data, 3855 bytes (0xf0f)
+0000: ..........0...0...........<..(..g.......~0...*.H........0<1.0...
+0040: U....US1.0...U....Amazon1.0...U....Amazon RSA 2048 M020...241101
+0080: 000000Z..251130235959Z0(1&0$..U....*.accessdevelopment-stage.com
+00c0: 0.."0...*.H.............0..........xf....1..34K..,..YT.E1).r...y
+0100: ....B-......9.MFP6.0..*..K......].uG.+.je.E:.h.5..............,.
+0140: .L.n~........z..E.DW..A.....'G.|....m3 .!UW..T...e~..O.....>....
+0180: V#........H....!./....?@3h..v...p7..T2.RH...x..!&...|D.27O9<....
+01c0: f.w.H.%r).w..;,3.@....m~..3.z.............0...0...U.#..0....1R.Z
+0200: P..|tq.....z...0...U.........G*......eE.e...E;0E..U...>0<..*.acc
+0240: essdevelopment-stage.com..accessdevelopment-stage.com0...U. ..0.
+0280: 0...g.....0...U...........0...U.%..0...+.........+.......0;..U..
+02c0: .40200...,.*http://crl.r2m02.amazontrust.com/r2m02.crl0u..+.....
+0300: ...i0g0-..+.....0..!http://ocsp.r2m02.amazontrust.com06..+.....0
+0340: ..*http://crt.r2m02.amazontrust.com/r2m02.cer0...U.......0.0..~.
+0380: .+.....y......n...j.h.v...N4.SrL.....?z....b...m0.....&:.....Wk.
+03c0: .....G0E. .k4;.r.w..[.>............K..x....!.."&i.1..B(..$....p.
+0400: .>.{....g.G...v...1c@w...A..q....@.......2...7.P.....Wk......G0E
+0440: .!..%Y\0..`.|9....t.~w)r....j+.^/... v..9..{...K......X.{..|@3.N
+0480: j.....v....j.q.e...S...|"..\.....~T..L.......Wk......G0E. c..x..
+04c0: 9.k$.hj..V.I7..k......c..-.!...m..jF...o..O....c...&....kuZ}.0..
+0500: .*.H................#..y.....CP......<..$!...L.`.. .o|.....7....
+0540: .Og.<.l..&.....G.....kR..V.{.q.+| .3W[.e.U...ho..A..(U.X..In....
+0580: ..T.$..Q<S4..+".5.A.....&..._...Z.>.....3...e...YDF.d...0..h\..p
+05c0: .m..@........'.F.N$...........l.z.qzh@.......T.....1.5>.q..E8P*.
+0600: ..s.A..I.."c....:..b0..^0..F........s.JK..N..;....-:..0...*.H...
+0640: .....091.0...U....US1.0...U....Amazon1.0...U....Amazon Root CA 1
+0680: 0...220823222530Z..300823222530Z0<1.0...U....US1.0...U....Amazon
+06c0: 1.0...U....Amazon RSA 2048 M020.."0...*.H.............0.........
+0700: C..Z.y.)..o...C..X..^7J...E.s...XYo...Fr.yP-...............2,.t.
+0740: .p<N..Wz.4.U{.e,.....c.,h.....W.;..'ZSL_9Z..E........7.l.R..e*..
+0780: .....NZ...b...).y.....gQ8Nx)j..(_'!..\..._R.Xv.#Sd.Y..".&...x>+.
+07c0: G...y8..we....;....z.Y..Ec...[..I.....%:..#hO.Ts8{.2.j,.....~us.
+0800: .......Z0..V0...U.......0.......0...U...........0...U.%..0...+..
+0840: .......+.......0...U.......1R.ZP..|tq.....z...0...U.#..0.......4
+0880: .......Y....N..0{..+........o0m0/..+.....0..#http://ocsp.rootca1
+08c0: .amazontrust.com0:..+.....0...http://crt.rootca1.amazontrust.com
+0900: /rootca1.cer0?..U...80604.2.0..http://crl.rootca1.amazontrust.co
+0940: m/rootca1.crl0...U. ..0.0...g.....0...*.H.............-N...@3~/.
+0980: .n..?.K...........][Q..y..Q.....j.7hf..)...[....E...[.u.....v,..
+09c0: .'^g..}...@N>(..w..U~.a.4.6....V.I4.pL>.,..5..:.F(.Nj..,.v$*.b.=
+0a00: ....&..f........S.Ho.... e".<......t....m[P9.Q[>j..C.R6....}.^..
+0a40: 4"......U .l.H..........j4.......5.M.9~..ZY.gZwoJ........0...0..
+0a80: z..........J*'.....+.......0...*.H........0..1.0...U....US1.0...
+0ac0: U....Arizona1.0...U....Scottsdale1%0#..U....Starfield Technologi
+0b00: es, Inc.1;09..U...2Starfield Services Root Certificate Authority
+0b40:  - G20...150525120000Z..371231010000Z091.0...U....US1.0...U....A
+0b80: mazon1.0...U....Amazon Root CA 10.."0...*.H.............0.......
+0bc0: ..x.q.x..q.G.Pt}n...v..h.X!`.t../..-...CzN...6.....H...6L...#.>.
+0c00: 7....Ih....v8.a....6..JV.E......t...59/.. P.lz.......G..P8....9X
+0c40: .....Hg0...x^o..Q.0.f.Ef.T.....H....0-}-tp5..$...Yn.s...2F(.C...
+0c80: .....$.-K.q\^i.....8..P8o..-b....T.w.g....#.?@ . ...L>;$&...l...
+0cc0: .........10..-0...U.......0....0...U...........0...U..........4.
+0d00: ......Y....N..0...U.#..0...._.....0+8...mJ.....0x..+........l0j0
+0d40: ...+.....0.."http://ocsp.rootg2.amazontrust.com08..+.....0..,htt
+0d80: p://crt.rootg2.amazontrust.com/rootg2.cer0=..U...60402.0...,http
+0dc0: ://crl.rootg2.amazontrust.com/rootg2.crl0...U. ..0.0...U. .0...*
+0e00: .H.............b7B\...>.,...lE...z..X....>..%<.oP..5j..4.2!.HD..
+0e40: .=..sm.....l.(...Gy..~0[.;.`.w.....|^....{"....~.F....&W.09b....
+0e80: .....>.ChlW.... ....j]..Jm.X...91_|s...j...'....F.~.r..R>...cw.i
+0ec0: ..9....EM.Q:.]]7dL~0.U$B.6.]...a.....$...t..{E)P9....5%..jG#1/\.
+0f00: ....bQ.*...4.!.
+== Info: TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+<= Recv SSL data, 333 bytes (0x14d)
+0000: ...I...A.Q......s7.....`..(...lk....Z.Z(^..<..FB..Q. ./.P..a..c.
+0040: ..^.9........P.U.2./o..4/..A.~..A.|..j.(.P..`.(.u|.R....NF.m....
+0080: ..-...._!...d.t.*..e.K`n.?r.G(C:9...<m.2...U`s/.....;.....x.\...
+00c0: .\"|....I.......;y.FP.(....b.k..8...|............K.Vl.R.5A..._..
+0100: .m..g.u.g.~..*8..(2}...?...]s.......m..[.}Z.I.G,....sO1...~.DR..
+0140: .+..D....C.=u
+== Info: TLSv1.2 (IN), TLS handshake, Server finished (14):
+<= Recv SSL data, 4 bytes (0x4)
+0000: ....
+== Info: TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+=> Send SSL data, 70 bytes (0x46)
+0000: ...BA...?:....W....J.^.Y....!...t#...^.......J.V....g......t.p.C
+0040: ...,..
+== Info: TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+=> Send SSL data, 1 bytes (0x1)
+0000: .
+== Info: TLSv1.2 (OUT), TLS handshake, Finished (20):
+=> Send SSL data, 16 bytes (0x10)
+0000: .....q.....GMGw.
+== Info: TLSv1.2 (IN), TLS change cipher, Change cipher spec (1):
+<= Recv SSL data, 1 bytes (0x1)
+0000: .
+== Info: TLSv1.2 (IN), TLS handshake, Finished (20):
+<= Recv SSL data, 16 bytes (0x10)
+0000: .....O)....>....
+== Info: SSL connection using TLSv1.2 / ECDHE-RSA-AES128-GCM-SHA256 / [blank] / UNDEF
+== Info: ALPN: server accepted h2
+== Info: Server certificate:
+== Info:  subject: CN=*.accessdevelopment-stage.com
+== Info:  start date: Nov  1 00:00:00 2024 GMT
+== Info:  expire date: Nov 30 23:59:59 2025 GMT
+== Info:  subjectAltName: host "attractions-api.accessdevelopment-stage.com" matched cert's "*.accessdevelopment-stage.com"
+== Info:  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+== Info:  SSL certificate verify ok.
+== Info: using HTTP/2
+== Info: [HTTP/2] [1] OPENED stream for https://attractions-api.accessdevelopment-stage.com/v1/attractions/admin/digital-codes/prd_0GV2BJMV03MBY
+== Info: [HTTP/2] [1] [:method: POST]
+== Info: [HTTP/2] [1] [:scheme: https]
+== Info: [HTTP/2] [1] [:authority: attractions-api.accessdevelopment-stage.com]
+== Info: [HTTP/2] [1] [:path: /v1/attractions/admin/digital-codes/prd_0GV2BJMV03MBY]
+== Info: [HTTP/2] [1] [user-agent: curl/8.7.1]
+== Info: [HTTP/2] [1] [accept: */*]
+== Info: [HTTP/2] [1] [content-length: 464]
+== Info: [HTTP/2] [1] [content-type: multipart/form-data; boundary=------------------------yKBXHixaYyD9wDn1t0wxt4]
+=> Send header, 270 bytes (0x10e)
+0000: POST /v1/attractions/admin/digital-codes/prd_0GV2BJMV03MBY HTTP/
+0040: 2
+0043: Host: attractions-api.accessdevelopment-stage.com
+0076: User-Agent: curl/8.7.1
+008e: Accept: */*
+009b: Content-Length: 464
+00b0: Content-Type: multipart/form-data; boundary=--------------------
+00f0: ----yKBXHixaYyD9wDn1t0wxt4
+010c: 
+=> Send data, 464 bytes (0x1d0)
+0000: --------------------------yKBXHixaYyD9wDn1t0wxt4
+0032: Content-Disposition: form-data; name="expiration"
+0065: 
+0067: 2025-01-02T14:00:00+00
+007f: --------------------------yKBXHixaYyD9wDn1t0wxt4
+00b1: Content-Disposition: form-data; name="threshold"
+00e3: 
+00e5: 10
+00e9: --------------------------yKBXHixaYyD9wDn1t0wxt4
+011b: Content-Disposition: form-data; name="file"; filename="test.csv"
+015d: Content-Type: application/octet-stream
+0185: 
+0187: code,pin.72341,1234
+019c: --------------------------yKBXHixaYyD9wDn1t0wxt4--
+== Info: upload completely sent off: 464 bytes
+<= Recv header, 13 bytes (0xd)
+0000: HTTP/2 200 
+<= Recv header, 37 bytes (0x25)
+0000: date: Tue, 03 Dec 2024 20:14:55 GMT
+<= Recv header, 32 bytes (0x20)
+0000: content-type: application/json
+<= Recv header, 2 bytes (0x2)
+0000: 
+<= Recv data, 125 bytes (0x7d)
+0000: {"batch_id":233,"file_name":"test.csv","product_identifier":"prd
+0040: _0GV2BJMV03MBY","attraction_identifier":"attr_0GV2B6S3M3MDM"}
+<= Recv data, 0 bytes (0x0)
+== Info: Connection #0 to host attractions-api.accessdevelopment-stage.com left intact
