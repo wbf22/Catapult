@@ -166,7 +166,6 @@ public class Main {
             response = client.get(url, headers, String.class);
         }
         else if (requestType.toLowerCase().equals("post")) {
-            System.out.println(body);
             response = client.post(url, headers, body, String.class);
         }
         else if (requestType.toLowerCase().equals("put")) {
